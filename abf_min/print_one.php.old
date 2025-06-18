@@ -1,0 +1,150 @@
+<?php require_once('../abfi_all_inc/Classes/include_all_min.php'); ?>
+<?php confirm_slogged_in();?>
+<?php confirm_session_svalid();?>
+<?php 
+//$state = base64_decode($_GET["sta"]);
+$event =base64_decode($_GET["eve"]);
+$roster =base64_decode($_GET["rid"]);
+$event1 =$_GET["eve"];
+$roster1 =$_GET["rid"];
+$form = new abfi_use();
+$sql_dates = "select event_dates,event_venue from abfi_tour_create where sec_event_id = '$event'";
+$result_dates = $form->extract($sql_dates);
+$row_dates = $result_dates->fetch_assoc();
+$edates = $row_dates["event_dates"];
+$evenue = $row_dates["event_venue"];
+
+$sql_gender = "select distinct gender from int_roster_ply where roster_id = '$roster'";
+$result_gender = $form->extract($sql_gender);
+$row_gender = $result_gender->fetch_assoc();
+$egender = $row_gender["gender"];
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   
+<title>ABFI | Roster Form | INDIA | Players</title>
+ <link href="css/bootstrap.min.css" rel="stylesheet" >
+ <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" >
+ 
+</head>
+<style>
+.roster_outer{height:900px; width:1020px; margin:auto; }
+#roster_head{height:140px; width:100%; border-bottom:2px solid black;}
+#roster_head1{float:left; margin-left:40px; margin-top:20px; position:absolute;}
+#roster_head2{float:left; width:100%; height:auto;}
+#roster_bd{float:left; width:100%: height:auto; margin-top:10px;}
+#roster_con{float:left;height:auto; width:500px; border:1px solid black; margin-left:7px; margin-top:7px;}
+#roster_con1{float:left; height:140px; width:139px;}
+#roster_con2{float:left; height:auto; width:359px; }
+#roster_con3{float:left; width:350px; height:auto; font-size:16px; margin-left:5px;}
+#roster_con4{float:left; width:80px; height:28px;}
+#roster_con5{float:left; margin-left:5px; width:265px; height:28px;}
+</style>
+<style type="text/css" media="print">
+  @page { size: landscape; }
+</style>
+<body>
+		<div style="padding-top:10px; padding-bottom:10px;" id="one">
+		<button class='print'><i class="fa fa-print fa-fw"></i> Print</button>
+		</div>
+
+<div class="roster_outer" id="page">
+
+		<div id="roster_head">
+			<div id="roster_head1"><img src="reg_images/logo.png"></div>
+			
+			<div id="roster_head2">
+				<center><h3>Amateur Baseball Federation of India</h3>
+				<h3 style="margin-top:-10px;"><b>Here is the Name of the event eg. TEST EVENT</b></h3>
+				<h4 style="margin-top:-8px;">Dated : 01/01/2017 - 01/01/2017 Held at :  Solan</h4>
+				<h4 style="margin-top:-8px;">Roster - State Name - Gender</h4>
+				</center>
+			</div>
+		</div>
+		
+		<div id="roster_bd">
+			
+		<?php 
+									$sql1 = "SELECT a.player_reg_id AS reg_id, b.full_name AS name, b.father_name AS father, b.dob AS dob, b.ply_img as image, a.status as status FROM int_roster_ply AS a
+											INNER JOIN abfi_ply_reg AS b ON a.player_reg_id = b.ply_reg_id where a.roster_id = '$roster' and a.event_id = '$event'";
+									
+									$result1 = $form->extract($sql1);
+										if (mysqli_num_rows($result1) > 0) {
+						// output data of each row
+						while($row = mysqli_fetch_assoc($result1)) {
+						        $a =$row["reg_id"];
+								$b =$row["name"];
+								$c =$row["father"];
+						        $d =$row["dob"]; 
+								$e =$row["image"];
+								$button_status =$row["status"];
+								echo"
+		
+			<div id='roster_con'>
+				<div id='roster_con1'><img class='thumbnail' src='../abf_use/off_reg_imgs/$e' style='height:130px; width:130px; margin-top:5px; margin-left:5px;'></div>	
+				<div id='roster_con2'>
+				
+				<div id='roster_con3'>
+				<div id='roster_con4'>Reg. ID</div>
+				<div id='roster_con5'>: $a</div></div>	
+				
+				<div id='roster_con3'>
+				<div id='roster_con4'>Name</div>
+				<div id='roster_con5'>: $b</div></div>				
+				
+				<div id='roster_con3'>
+				<div id='roster_con4'>Father</div>
+				<div id='roster_con5'>: $c</div></div>	
+
+				<div id='roster_con3'>
+				<div id='roster_con4'>D.O.B.</div>
+				<div id='roster_con5'>: $d</div></div>
+				
+				<div id='roster_con3'>
+				<div id='roster_con4'>Signature</div>
+				<div id='roster_con5'>: </div></div>					
+				
+				
+				</div>
+			</div>"; 
+						
+						}
+						} else {
+						echo "0 results click next to view and print next page details.";
+								}
+									?>	
+		</div>
+
+</div>
+
+
+	  <script src="js/jquery.js"></script>
+	  <script src="js/html2canvas.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+	
+	 <script>
+	
+	$('.print').on('click', function(){		
+		html2canvas(document.body, {
+	        onrendered: function(canvas) {
+	        	
+	        	$("#page").hide();
+				$("#one").hide();
+	            document.body.appendChild(canvas);
+	            window.print();
+	            $('canvas').remove();
+	            $("#page").show();
+				$("#one").show();
+	        }
+	    });
+	    
+	});
+	
+	</script>
+
+</body>
+
+</html>

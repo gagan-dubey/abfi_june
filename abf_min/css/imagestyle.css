@@ -1,0 +1,139 @@
+.thumbnail {
+    position:relative;
+    overflow:hidden;
+	width:150px;
+	height:150px;
+}
+ 
+.caption {
+    position:absolute;
+    top:0;
+    right:0;
+    background:rgba(66, 139, 202, 0.75);
+    width:100%;
+    height:100%;
+    padding:2%;
+    display: none;
+    text-align:center;
+    color:#fff !important;
+    z-index:2;
+}
+
+#imagePreview {
+    width: 180px;
+    height: 180px;
+    background-position: center center;
+    background-size: cover;
+    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+    display: inline-block;
+}
+
+#manageleft
+{
+	  margin-top:10px; 
+      margin-left:200px;
+}
+
+@media (max-width: 610px) and (min-width: 590px){
+	
+	#manageleft
+{
+	margin-left:180px;
+}
+}
+
+@media (max-width: 589px) and (min-width: 560px){
+	
+	#manageleft
+{
+	margin-left:170px;
+}
+}
+
+@media (max-width: 559px) and (min-width: 540px){
+	
+	#manageleft
+{
+	margin-left:160px;
+}
+}
+
+@media (max-width: 539px) and (min-width: 520px){
+	
+	#manageleft
+{
+	margin-left:150px;
+}
+}
+
+@media (max-width: 519px) and (min-width: 490px){
+	
+	#manageleft
+{
+	margin-left:140px;
+}
+}
+
+@media (max-width: 489px) and (min-width: 450px) {
+	
+	#manageleft
+{
+	margin-left: 120px;
+	
+}
+}
+
+@media (max-width: 449px) and (min-width: 400px) {
+	
+	#manageleft
+{
+	margin-left: 100px;
+	
+}
+}
+
+@media (max-width: 399px) and (min-width: 370px) {
+	
+	#manageleft
+{
+	margin-left: 80px;
+	
+}
+}
+
+@media (max-width: 369px) and (min-width: 330px) {
+	
+	#manageleft
+{
+	margin-left: 60px;
+	
+}
+}
+
+@media (max-width: 329px) and (min-width: 300px) {
+	
+	#manageleft
+{
+	margin-left: 40px;
+	
+}
+}
+
+@media (max-width: 299px) and (min-width: 281px) {
+	
+	#manageleft
+{
+	margin-left: 30px;
+	
+}
+}
+
+@media (max-width: 280px) {
+	
+	#manageleft
+{
+	margin-left: 10px;
+	
+}
+}
+
